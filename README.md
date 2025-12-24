@@ -110,41 +110,41 @@ Total retries:     2
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    OpenAPI Spec (YAML)                       │
+│                    OpenAPI Spec (YAML)                      │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                  OpenAPI Parser                              │
-│  • Endpoint detection (keyword scoring)                      │
-│  • Auth detection (Bearer, API key)                          │
-│  • Field mapping (prompt, response)                          │
+│                  OpenAPI Parser                             │
+│  • Endpoint detection (keyword scoring)                     │
+│  • Auth detection (Bearer, API key)                         │
+│  • Field mapping (prompt, response)                         │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                  ConnectorConfig (JSON)                      │
-│  • Provider, base_url, auth                                  │
-│  • Request mapping (endpoint, static_fields)                 │
-│  • Response mapping (response_field)                         │
+│                  ConnectorConfig (JSON)                     │
+│  • Provider, base_url, auth                                 │
+│  • Request mapping (endpoint, static_fields)                │
+│  • Response mapping (response_field)                        │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                  ConnectorRuntime                            │
-│  • Build headers (auth, extra headers)                       │
-│  • Build body (inject prompt)                                │
-│  • Execute with retry logic                                  │
-│  • Parse response (extract content)                          │
+│                  ConnectorRuntime                           │
+│  • Build headers (auth, extra headers)                      │
+│  • Build body (inject prompt)                               │
+│  • Execute with retry logic                                 │
+│  • Parse response (extract content)                         │
 └─────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                     Scanner                                  │
-│  • Load prompts from file                                    │
-│  • Call connector for each prompt                            │
-│  • Analyze responses (mock: random good/bad)                 │
-│  • Generate summary report                                   │
+│                     Scanner                                 │
+│  • Load prompts from file                                   │
+│  • Call connector for each prompt                           │
+│  • Analyze responses (mock: random good/bad)                │
+│  • Generate summary report                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
