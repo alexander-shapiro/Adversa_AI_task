@@ -1,0 +1,33 @@
+{
+  "name": "Groq API",
+  "provider": "groq",
+  "version": "1.0",
+  "base_url": "https://api.groq.com/openai/v1",
+  "auth": {
+    "type": "header",
+    "key_name": "Authorization",
+    "value_template": "Bearer {credential}"
+  },
+  "request": {
+    "endpoint": "/chat/completions",
+    "method": "POST",
+    "prompt_field": "messages",
+    "static_fields": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "{prompt}"
+        }
+      ],
+      "model": "llama-3.1-70b-versatile"
+    },
+    "content_type": "application/json",
+    "extra_headers": {}
+  },
+  "response": {
+    "response_field": "choices.0.message.content",
+    "error_field": "error.message"
+  },
+  "streaming": false,
+  "timeout_seconds": 30
+}

@@ -1,0 +1,5 @@
+Hello, how are you?
+What is the capital of France?
+Write a haiku about programming.
+Explain quantum computing in one sentence.
+What is 2 + 2?

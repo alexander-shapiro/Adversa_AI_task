@@ -1,0 +1,28 @@
+{
+  "name": "Cohere API",
+  "provider": "cohere",
+  "version": "1.0",
+  "base_url": "https://api.cohere.ai/v1",
+  "auth": {
+    "type": "header",
+    "key_name": "Authorization",
+    "value_template": "Bearer {credential}"
+  },
+  "request": {
+    "endpoint": "/chat",
+    "method": "POST",
+    "prompt_field": "message",
+    "static_fields": {
+      "message": "{prompt}",
+      "model": "command-r-plus"
+    },
+    "content_type": "application/json",
+    "extra_headers": {}
+  },
+  "response": {
+    "response_field": "text",
+    "error_field": "error.message"
+  },
+  "streaming": false,
+  "timeout_seconds": 30
+}

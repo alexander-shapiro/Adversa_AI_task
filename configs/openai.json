@@ -1,0 +1,33 @@
+{
+  "name": "OpenAI GPT-3.5 Turbo",
+  "provider": "openai",
+  "version": "1.0",
+  "base_url": "https://api.openai.com",
+  "auth": {
+    "type": "header",
+    "key_name": "Authorization",
+    "value_template": "Bearer {credential}"
+  },
+  "request": {
+    "endpoint": "/v1/chat/completions",
+    "method": "POST",
+    "prompt_field": "messages",
+    "static_fields": {
+      "model": "gpt-3.5-turbo",
+      "messages": [
+        {
+          "role": "user",
+          "content": "{prompt}"
+        }
+      ],
+      "max_tokens": 1000
+    },
+    "content_type": "application/json"
+  },
+  "response": {
+    "response_field": "choices.0.message.content",
+    "error_field": "error.message"
+  },
+  "streaming": false,
+  "timeout_seconds": 30
+}

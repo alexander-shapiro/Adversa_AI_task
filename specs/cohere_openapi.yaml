@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: Cohere API
+  version: 2.0.0
+  description: The Cohere API for language models.
+
+servers:
+  - url: https://api.cohere.ai/v1
+
+security:
+  - BearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: "Use 'Bearer YOUR_API_KEY' in the Authorization header"
+
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: The user message to respond to
+        model:
+          type: string
+          description: The model to use
+          example: command-r-plus
+        preamble:
+          type: string
+          description: System preamble for context
+        chat_history:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum: [USER, CHATBOT]
+              message:
+                type: string
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+
+    ChatResponse:
+      type: object
+      properties:
+        response_id:
+          type: string
+        text:
+          type: string
+          description: The generated response text
+        generation_id:
+          type: string
+        chat_history:
+          type: array
+          items:
+            type: object
+        finish_reason:
+          type: string
+        meta:
+          type: object
+          properties:
+            api_version:
+              type: object
+            billed_units:
+              type: object
+              properties:
+                input_tokens:
+                  type: integer
+                output_tokens:
+                  type: integer
+
+    GenerateRequest:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: The prompt to generate from
+        model:
+          type: string
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+
+    GenerateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        generations:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              text:
+                type: string
+              finish_reason:
+                type: string
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+
+paths:
+  /chat:
+    post:
+      operationId: chat
+      summary: Chat with the model
+      description: Generate a response to a user message
+      tags:
+        - Chat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /generate:
+    post:
+      operationId: generate
+      summary: Generate text
+      description: Generate text from a prompt
+      tags:
+        - Generate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+
+  /models:
+    get:
+      operationId: listModels
+      summary: List available models
+      tags:
+        - Models
+      responses:
+        '200':
+          description: List of models

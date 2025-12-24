@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: Anthropic API
+  version: 2023-06-01
+  description: The Anthropic REST API for Claude models.
+
+servers:
+  - url: https://api.anthropic.com/v1
+
+security:
+  - ApiKeyAuth: []
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: "Your Anthropic API key"
+
+  schemas:
+    MessagesRequest:
+      type: object
+      required:
+        - model
+        - messages
+        - max_tokens
+      properties:
+        model:
+          type: string
+          description: The model to use for completion
+          example: claude-3-haiku-20240307
+        messages:
+          type: array
+          description: Input messages for the conversation
+          items:
+            type: object
+            required:
+              - role
+              - content
+            properties:
+              role:
+                type: string
+                enum: [user, assistant]
+              content:
+                type: string
+        max_tokens:
+          type: integer
+          description: Maximum number of tokens to generate
+        system:
+          type: string
+          description: System prompt to set context
+        temperature:
+          type: number
+          description: Sampling temperature
+        stream:
+          type: boolean
+          default: false
+
+    MessagesResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: message
+        role:
+          type: string
+          example: assistant
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: text
+              text:
+                type: string
+        model:
+          type: string
+        stop_reason:
+          type: string
+        usage:
+          type: object
+          properties:
+            input_tokens:
+              type: integer
+            output_tokens:
+              type: integer
+
+    Error:
+      type: object
+      properties:
+        type:
+          type: string
+        error:
+          type: object
+          properties:
+            type:
+              type: string
+            message:
+              type: string
+
+paths:
+  /messages:
+    post:
+      operationId: createMessage
+      summary: Create a Message
+      description: Send a structured list of input messages and receive a response
+      tags:
+        - Messages
+      parameters:
+        - name: anthropic-version
+          in: header
+          required: true
+          schema:
+            type: string
+            example: "2023-06-01"
+          description: The version of the Anthropic API
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessagesRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /complete:
+    post:
+      operationId: createCompletion
+      summary: Create a completion (legacy)
+      description: Legacy text completion endpoint
+      tags:
+        - Completions
+      parameters:
+        - name: anthropic-version
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - model
+                - prompt
+                - max_tokens_to_sample
+              properties:
+                model:
+                  type: string
+                prompt:
+                  type: string
+                  description: The prompt with Human/Assistant format
+                max_tokens_to_sample:
+                  type: integer
+      responses:
+        '200':
+          description: Successful response

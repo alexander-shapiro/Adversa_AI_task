@@ -1,0 +1,36 @@
+{
+  "name": "Anthropic Claude 3 Haiku",
+  "provider": "anthropic",
+  "version": "1.0",
+  "base_url": "https://api.anthropic.com",
+  "auth": {
+    "type": "header",
+    "key_name": "x-api-key",
+    "value_template": "{credential}"
+  },
+  "request": {
+    "endpoint": "/v1/messages",
+    "method": "POST",
+    "prompt_field": "messages",
+    "static_fields": {
+      "model": "claude-3-haiku-20240307",
+      "max_tokens": 1024,
+      "messages": [
+        {
+          "role": "user",
+          "content": "{prompt}"
+        }
+      ]
+    },
+    "content_type": "application/json",
+    "extra_headers": {
+      "anthropic-version": "2023-06-01"
+    }
+  },
+  "response": {
+    "response_field": "content.0.text",
+    "error_field": "error.message"
+  },
+  "streaming": false,
+  "timeout_seconds": 30
+}
