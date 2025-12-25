@@ -4,12 +4,12 @@ A universal adapter for connecting to arbitrary AI chatbot APIs.
 
 ## Phases Completed
 
-| Phase | Goal | Status |
-|-------|------|--------|
-| 1 | Walking Skeleton - One API works | ✅ |
-| 2 | Second API + Scanner Mock | ✅ |
-| 3 | Config Generator from OpenAPI | ✅ |
-| 4 | Hardening + 4th API | ✅ |
+| Phase  | Goal                             | Status  |
+|--------|----------------------------------|---------|
+| 1      | Walking Skeleton - One API works | ✅      |
+| 2      | Second API + Scanner Mock        | ✅      |
+| 3      | Config Generator from OpenAPI    | ✅      |
+| 4      | Hardening + 4th API              | ✅      |
 
 ### What's Built
 

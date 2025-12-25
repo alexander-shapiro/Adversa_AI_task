@@ -24,13 +24,13 @@ Built a working engine that automatically connects to arbitrary AI chatbot APIs.
 
 ```
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  OpenAPI Spec    │────▶│ Config Generator │────▶│ ConnectorConfig  │
+│  OpenAPI Spec    │────>│ Config Generator │────>│ ConnectorConfig  │
 │  (YAML)          │     │ (Heuristics)     │     │ (JSON)           │
 └──────────────────┘     └──────────────────┘     └──────────────────┘
                                                            │
                                                            ▼
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  Scanner         │────▶│ ConnectorRuntime │────▶│  AI API          │
+│  Scanner         │────>│ ConnectorRuntime │────>│  AI API          │
 │  (Batch prompts) │     │ (HTTP + Retry)   │     │  (Any provider)  │
 └──────────────────┘     └──────────────────┘     └──────────────────┘
 ```
