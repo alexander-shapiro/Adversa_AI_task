@@ -91,13 +91,13 @@ OpenAPI Spec → Parser → ConnectorConfig → Runtime → Any AI API
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `generate_config.py` | Create config from OpenAPI spec |
-| `scanner.py` | Run batch prompts through any API |
-| `main.py` | Test single prompt |
-| `test.py` | Verify everything works |
-| `demo.py` | Full interactive demo |
+| File                 | Purpose                           |
+|----------------------|-----------------------------------|
+| `generate_config.py` | Create config from OpenAPI spec   |
+| `scanner.py`         | Run batch prompts through any API |
+| `main.py`            | Test single prompt                |
+| `test.py`            | Verify everything works           |
+| `demo.py`            | Full interactive demo             |
 
 ## Run the Full Demo
 

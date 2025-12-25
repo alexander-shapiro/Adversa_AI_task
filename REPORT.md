@@ -24,26 +24,26 @@ Built a working engine that automatically connects to arbitrary AI chatbot APIs.
 
 ```
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  OpenAPI Spec    │────▶│  Config Generator │────▶│ ConnectorConfig  │
-│  (YAML)          │     │  (Heuristics)     │     │ (JSON)           │
+│  OpenAPI Spec    │────▶│ Config Generator │────▶│ ConnectorConfig  │
+│  (YAML)          │     │ (Heuristics)     │     │ (JSON)           │
 └──────────────────┘     └──────────────────┘     └──────────────────┘
                                                            │
                                                            ▼
 ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
-│  Scanner         │────▶│  ConnectorRuntime │────▶│  AI API          │
-│  (Batch prompts) │     │  (HTTP + Retry)   │     │  (Any provider)  │
+│  Scanner         │────▶│ ConnectorRuntime │────▶│  AI API          │
+│  (Batch prompts) │     │ (HTTP + Retry)   │     │  (Any provider)  │
 └──────────────────┘     └──────────────────┘     └──────────────────┘
 ```
 
 ### Components Built
 
-| Component | Lines | Purpose |
-|-----------|-------|---------|
-| `config_schema.py` | 160 | ConnectorConfig dataclass + serialization |
-| `runtime.py` | 350 | HTTP executor with retry logic |
-| `openapi_parser.py` | 450 | OpenAPI parser + config generator |
-| `scanner.py` | 360 | Mock scanning workflow |
-| `test.py` | 280 | Comprehensive test suite |
+| Component           | Lines | Purpose                                    |
+|---------------------|-------|--------------------------------------------|
+| `config_schema.py`  | 160   | ConnectorConfig dataclass + serialization  |
+| `runtime.py`        | 350   | HTTP executor with retry logic             |
+| `openapi_parser.py` | 450   | OpenAPI parser + config generator          |
+| `scanner.py`        | 360   | Mock scanning workflow                     |
+| `test.py`           | 280   | Comprehensive test suite                   |
 
 ### Key Design Decisions
 
@@ -84,13 +84,13 @@ python generate_config.py --spec specs/openai_openapi.yaml --output test.json --
 
 ### Success Criteria Met
 
-| Criterion | Status | Evidence |
-|-----------|--------|----------|
-| Accepts OpenAPI spec as input | ✅ | `generate_config.py --spec` |
-| Auto-generates connector config | ✅ | 4 generated configs in `/configs` |
-| Scanner can send prompts | ✅ | `scanner.py` batch processing |
-| Scanner receives responses | ✅ | Response extraction works |
-| Different APIs treated uniformly | ✅ | Same scanner code, different configs |
+| Criterion                        | Status  | Evidence                             |
+|----------------------------------|---------|--------------------------------------|
+| Accepts OpenAPI spec as input    | ✅      | `generate_config.py --spec`          |
+| Auto-generates connector config  | ✅      | 4 generated configs in `/configs`    |
+| Scanner can send prompts         | ✅      | `scanner.py` batch processing        |
+| Scanner receives responses       | ✅      | Response extraction works            |
+| Different APIs treated uniformly | ✅      | Same scanner code, different configs |
 
 ### AI Assistance Used
 
