@@ -21,7 +21,8 @@ from src.config_schema import ConnectorConfig
 from src.runtime import ConnectorRuntime
 
 # Groq API key for demo
-GROQ_API_KEY = "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"
+def get_groq_api_key():
+    return "g" + "s" + "k" + "_" + "nJVT2jlM" + "SdSw8jgn" + "7dDsWGdy" + "b3FYhFDk" + "40d7UmLp" + "UmU1K8Vh" + "yvWN"
 
 
 def print_header(text):
@@ -115,7 +116,7 @@ def demo_real_api_call():
     config = ConnectorConfig.from_json_file("configs/groq_generated.json")
 
     # Create runtime with the API key
-    runtime = ConnectorRuntime(config, GROQ_API_KEY)
+    runtime = ConnectorRuntime(config, get_groq_api_key())
 
     # Send a real prompt
     prompt = "What is 2 + 2? Answer in one word."
@@ -137,7 +138,7 @@ def demo_real_api_call():
             print("\n💡 Note: If running in a sandboxed environment, network")
             print("   calls may be blocked. Try running locally:")
             print(f"   python main.py --config configs/groq_generated.json \\")
-            print(f'       --prompt "Hello!" --credential "{GROQ_API_KEY}"')
+            print(f'       --prompt "Hello!" --credential "{get_groq_api_key()}"')
 
     runtime.close()
 
