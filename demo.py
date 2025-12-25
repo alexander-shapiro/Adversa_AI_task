@@ -91,12 +91,17 @@ def demo_scanner_mock():
         ["python", "scanner.py", "--config", "configs/groq_generated.json",
          "--prompts", "prompts.txt", "--mock", "--quiet"],
         capture_output=True,
-        text=True
+        text=True,
+        encoding='utf-8',
+        errors='replace'  # Replace undecodable chars instead of crashing
     )
 
     # Parse and show summary
     output = result.stdout
-    print(output)
+    if result.returncode != 0 and result.stderr:
+        print(f"Scanner output:\n{result.stderr}")
+    else:
+        print(output)
 
 
 def demo_real_api_call():
